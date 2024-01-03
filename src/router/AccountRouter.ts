@@ -19,8 +19,9 @@ export const accountRouter: Router = express.Router();
 //Routes
 
 accountRouter.post("/signup", accountController.signup);
-
+accountRouter.post("/account/validate-token", accountController.validateToken);
 accountRouter.post("/login", accountController.login);
+
 accountRouter.get("/admin/profile", accountController.getProfile);
 
 accountRouter.put("/admin/edit-credential", accountController.editCredential);
