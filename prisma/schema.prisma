@@ -4,16 +4,25 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://pulotarso725:Ot4IuGe5VvBP@ep-square-limit-17662612.us-east-2.aws.neon.tech/course_backend?sslmode=require"
 }
 
-model Admin {
-  id         String   @id
-  email      String   @unique
+//Coloquei o DB direto aqui pra não ter conflito se voce (recrutador) for rodar o projeto localmente
+
+enum Account_type {
+  ADMIN
+  PROFESSOR
+  USER
+}
+
+model Account {
+  id         String       @id
+  email      String       @unique
   password   String
   name       String
   last_name  String
-  created_at DateTime @default(now())
+  type       Account_type @default(USER)
+  created_at DateTime     @default(now())
 }
 
 model Professor {
@@ -23,7 +32,7 @@ model Professor {
   lastname       String
   profile_img    String?
   created_at     DateTime @default(now())
-  status         Boolean
+  status         Boolean  @default(true)
   specialization String[]
 
   course_professor_relation course_professor_relation[]
@@ -34,10 +43,10 @@ model Course {
   name                 String
   description          String
   category             String
-  hours                Int
+  hours                Int      @default(10)
   difficulty           String
   programming_language String
-  status               Boolean
+  status               Boolean  @default(true)
   created_at           DateTime @default(now())
 
   course_professor_relation course_professor_relation[]

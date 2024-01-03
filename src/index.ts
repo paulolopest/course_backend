@@ -1,6 +1,8 @@
 import cors from "cors";
 import express, { Express } from "express";
-import { adminRouter } from "./router/AdminRouter";
+import { accountRouter } from "./router/AccountRouter";
+import { professorRouter } from "./router/ProfessorRouter";
+import { courseRouter } from "./router/CourseRouter";
 
 const port: number = 3000;
 const app: Express = express();
@@ -18,4 +20,6 @@ const server = app.listen(port, () => {
 
 //Routes
 
-app.use(adminRouter);
+app.use(accountRouter);
+app.use(professorRouter);
+app.use(courseRouter);
