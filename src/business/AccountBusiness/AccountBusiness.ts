@@ -46,7 +46,7 @@ export class AccountBusiness {
 
    login = async (email: string, password: string) => {
       try {
-         if (!email) throw new CustomError(400, "Invalid emails");
+         if (!email) throw new CustomError(400, "Invalid email");
          if (!password) throw new CustomError(400, "Enter a password");
 
          const user: Account | null = await this.accountData.getUserByEmail(email);

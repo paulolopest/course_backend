@@ -20,7 +20,7 @@ export const accountRouter: Router = express.Router();
 
 accountRouter.post("/signup", accountController.signup);
 
-accountRouter.get("/login", accountController.login);
+accountRouter.post("/login", accountController.login);
 accountRouter.get("/admin/profile", accountController.getProfile);
 
 accountRouter.put("/admin/edit-credential", accountController.editCredential);
