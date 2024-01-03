@@ -69,6 +69,23 @@ export class AccountBusiness {
       }
    };
 
+   validateToken = async (token: string) => {
+      try {
+         if (!token) throw new CustomError(400, "Enter a token");
+
+         const validate = this.tokenManager.getTokenData(token);
+         if (!validate) throw new CustomError(401, "Invalid token, login again");
+
+         return true;
+      } catch (error: any) {
+         if (error instanceof CustomError) {
+            throw new CustomError(error.statusCode, error.message);
+         } else {
+            throw new Error(error.message);
+         }
+      }
+   };
+
    editCredential = async (
       password: string,
       token: string,

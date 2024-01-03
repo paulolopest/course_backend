@@ -37,6 +37,21 @@ export class AccountController {
       }
    };
 
+   validateToken = async (req: Request, res: Response) => {
+      try {
+         const { token } = req.body;
+         const response = await this.accountBusiness.validateToken(token);
+
+         res.status(200).send(response);
+      } catch (error: any) {
+         if (error instanceof CustomError) {
+            res.status(error.statusCode).send(error.message);
+         } else {
+            res.status(404).send(error.message);
+         }
+      }
+   };
+
    editCredential = async (req: Request, res: Response) => {
       try {
          const token: string = req.headers.authorization as string;
